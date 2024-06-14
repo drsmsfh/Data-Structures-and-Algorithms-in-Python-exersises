@@ -1,25 +1,20 @@
-"""
-QUESTION 1: Alice has some cards with numbers written on them.
-She arranges the cards in decreasing order, 
-and lays them out face down in a sequence on a table. 
-She challenges Bob to pick out the card containing a given number by turning over as few cards as possible.
-Write a function to help Bob locate the card.
-"""
-cards = []
-wanted_number = 0
-
-
-def checker(x,y):
-    output = []
-    for index, item in enumerate(x):
-        if item != y:
-            continue
-        elif item == y :
-            output.append(index)
-    if len(output) == 0:
-        output = [-1]
+nums = [2, 7, 11, 15],
+target = 9
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        nt = {}
+        for index, num in enumerate(nums):
+            x = target - num
+            if x in nt:
+                return [index,nums.index(x)]
             
-    return output
-            
+            nt[num] = index
+            return
 
-print(checker(cards,wanted_number))
+            
+                   

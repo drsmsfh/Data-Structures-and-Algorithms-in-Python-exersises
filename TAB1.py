@@ -1,20 +1,21 @@
-nums = [2, 7, 11, 15],
-target = 9
 class Solution(object):
-    def twoSum(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: List[int]
-        """
-        nt = {}
-        for index, num in enumerate(nums):
-            x = target - num
-            if x in nt:
-                return [index,nums.index(x)]
-            
-            nt[num] = index
-            return
-
-            
-                   
+    def isPalindrome(self, x):
+        if x < -2**31 or x > 2**31 - 1:
+            return False
+        if x == 0:
+            return True
+        elif x < 0:
+            return False
+        def reverse_integer(x):
+            reversed_int = 0
+            while x!=0:
+                reversed_int = reversed_int*10 + x%10
+                x //=10
+            return reversed_int
+        if x == reverse_integer(x):
+            return True
+        else:
+            return False
+        
+sol = Solution()
+print(sol.isPalindrome(121))

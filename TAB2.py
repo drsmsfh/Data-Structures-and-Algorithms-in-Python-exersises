@@ -1,20 +1,49 @@
-class Solution(object):
-    def isPalindrome(self, x):
-        if x > -2^31 and x < 2^31 - 1:
-            if x == 0:
-                return True
-            elif x < 0:
-                return False
-        def reverse_integer(x):
-            reversed_int = 0
-            while x!=0:
-                reversed_int = reversed_int*10 + x%10
-                x //=10
-            return reversed_int
-        if x == reverse_integer(x):
-            return True
-        else:
-            return False
+# class Node:
+    ## WRITE NODE CONSTRUCTOR HERE ##
+    #                               #
+    #                               #
+    #                               #
+    #                               #
+    #################################
 
-sol = Solution()
-print(sol.isPalindrome(121))
+class Node:
+    def __init__(self,data):
+        self.data = data
+        self.next = None
+        
+                
+# class LinkedList:
+    ## WRITE LL CONSTRUCTOR HERE ##
+    #                             #
+    #                             #
+    #                             #
+    #                             #
+    ###############################
+class LinkedList:
+    def __init__(self,data):
+        newNode = Node(data)
+        self.head = newNode
+        self.tail = newNode
+        self.length = 1
+        
+
+
+
+ 
+my_linked_list = LinkedList(4)
+
+print('Head:', my_linked_list.head.value)
+print('Tail:', my_linked_list.tail.value)
+print('Length:', my_linked_list.length)
+
+
+"""
+    EXPECTED OUTPUT:
+    ----------------
+    Head: 4
+    Tail: 4
+    Length: 1
+    
+"""
+
+                                                                                                                    

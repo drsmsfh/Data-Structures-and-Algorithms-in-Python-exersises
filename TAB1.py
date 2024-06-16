@@ -1,21 +1,22 @@
 class Solution(object):
-    def isPalindrome(self, x):
-        if x < -2**31 or x > 2**31 - 1:
-            return False
-        if x == 0:
-            return True
-        elif x < 0:
-            return False
-        def reverse_integer(x):
-            reversed_int = 0
-            while x!=0:
-                reversed_int = reversed_int*10 + x%10
-                x //=10
-            return reversed_int
-        if x == reverse_integer(x):
-            return True
-        else:
-            return False
-        
-sol = Solution()
-print(sol.isPalindrome(121))
+    def romanToInt(self, s):
+        sum = 0
+        roman_numerals = {
+    'I': 1,
+    'V': 5,
+    'X': 10,
+    'L': 50,
+    'C': 100,
+    'D': 500,
+    'M': 1000,
+}
+        priv = 0
+        for i in reversed(s):
+            cornv =roman_numerals[i]
+            if cornv >= priv:
+                sum+=cornv
+                priv = cornv
+            else:
+                sum-=cornv
+                privr = cornv
+        return sum

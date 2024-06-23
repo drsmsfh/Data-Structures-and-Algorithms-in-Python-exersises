@@ -1,115 +1,53 @@
-class Node:
-    def __init__(self,value):
-        self.value = value
-        self.next = None
-class LinkedList:
-    def __init__(self,value):
-        new_Node = Node(value)
-        self.head = new_Node
-        self.tail = new_Node
-        self.length = 1
-    def print_list(self):
-        tmp = self.head
-        while tmp is not None:
-            print(tmp.value)
-            tmp =tmp.next
-    def append(self,value):    
-        new_Node = Node(value)
-        if self.length == 0:
-            self.head = new_Node
-            self.tail = new_Node
-        else:
-            self.tail.next =new_Node
-            self.tail = new_Node
-        self.length += 1
-    def prepend(self,value):
-        new_Node = Node(value)
-        if self.length == 0:
-            self.head = new_Node
-            self.tail = new_Node
-        else:
-            new_Node.next = self.head
-            self.head= new_Node
-        self.length +=1
-        return True
-    def pop(self):
-        if self.length == 0:
-            return None
-        tmp = self.head
-        pre = self.head
-        while tmp.next:
-            pre = tmp
-            tmp =tmp.next
-        self.head = pre
-        pre.next = None
-        self.length -= 1
-        if self.length == 0:
-            self.head =None
-            self.tail = None
-        return tmp
-    def pop_first(self):
-        if self.length == 0 :
-            return None
-        tmp = self.head
-        self.head = self.head.next
-        tmp.next = None
-        self.length -=1
-        if self.length == 0:
-            self.head =None
-            self.tail = None
-        return tmp
-    def get(self,index):
-        if index < 0 or index >= self.length:
-            return None
-        tmp = self.head
-        for _ in range(index):
-            tmp = tmp.next
-        return tmp
-    def set_value(self,index,value):
-        new_Node = Node(value)
-        if index < 0 or index > self.length:
-            return False
-        elif index == 0:
-            self.prepend(value)
-        elif index == self.length:
-            self.append(value)
-        new_Node = Node(value)
-        pre = self.get(index-1)
-        new_Node.next = pre.next
-        pre.next = new_Node
-        
-    
+class ListNode(object):
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
 
+class Solution(object):
+    def addTwoNumbers(self, l1, l2):
+        dummy = ListNode()
+        cus = dummy
+        curry = 0
+        while l1 or l2 or curry:
+            v1 = l1.val if l1 else 0
+            v2 = l2.val if l2 else 0
+            val = v1 + v2 + curry
+            curry = val // 10
+            val = val % 10
+            cus.next = ListNode(val)
+            cus = cus.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return dummy.next
 
+def create_linked_list(nums):
+    dummy = ListNode()
+    curr = dummy
+    for num in nums:
+        curr.next = ListNode(num)
+        curr = curr.next
+    return dummy.next
 
-my_linked_list = LinkedList(11)
-my_linked_list.append(3)
-my_linked_list.append(23)
-my_linked_list.append(7)
+def print_linked_list(node):
+    nums = []
+    while node:
+        nums.append(node.val)
+        node = node.next
+    return nums
 
-print('LL before set_value():')
-my_linked_list.print_list()
+# Test cases
+test_cases = [
+    ([2, 4, 3], [5, 6, 4]), # Expected output: [7, 0, 8]
+    ([9, 9, 9, 9, 9, 9, 9], [9, 9, 9, 9]), # Expected output: [8, 9, 9, 9, 0, 0, 0, 1]
+    ([0], [0]), # Expected output: [0]
+    ([9, 9], [1]), # Expected output: [0, 0, 1]
+    ([5], [5]) # Expected output: [0, 1]
+]
 
-my_linked_list.set_value(1,4)
+sol = Solution()
 
-print('\nLL after set_value():')
-my_linked_list.print_list()
-
-
-
-"""
-    EXPECTED OUTPUT:
-    ----------------
-    LL before set_value():
-    11
-    3
-    23
-    7
-
-    LL after set_value():
-    11
-    4
-    23
-    7
-"""
-            
+for l1_nums, l2_nums in test_cases:
+    l1 = create_linked_list(l1_nums)
+    l2 = create_linked_list(l2_nums)
+    result = sol.addTwoNumbers(l1, l2)
+    print(print_linked_list(result))

@@ -1,16 +1,15 @@
+# Definition for singly-linked list.
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
 class Solution(object):
-    def removeElements(self, head, val):
-        """
-        :type head: ListNode
-        :type val: int
-        :rtype: ListNode
-        """
-        dummy =ListNode(0)
-        dummy.next = head
-        tmp = dummy
-        while tmp.next:
-            if tmp.next.val == val:
-                tmp.next = tmp.next.next
-            else:
-                tmp=tmp.next
-        return dummy.next
+    def reverseList(self, head):
+        cur = head
+        prev = None
+        while cur:
+            nxt = cur.next
+            cur.next = prev
+            prev = cur
+            cur = nxt
+        return prev
